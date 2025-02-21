@@ -29,7 +29,7 @@ function Register() {
     }
 
     return (
-        <>
+        <div className="auth-container">
             <h2>Регистрация</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -55,7 +55,7 @@ function Register() {
                     } required/>
                 <button type="submit">Зарегистрироваться</button>
             </form>
-        </>
+        </div>
     )
 }
 
