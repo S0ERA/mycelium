@@ -5,7 +5,7 @@ function NavBar() {
         <nav className="navBar">
             <Link to='/register'>reg</Link>
             <Link to='/login'>log</Link>
-            <Link to='/'>res</Link>
+            <Link to='/home'>home</Link>
         </nav>
     )
 }
