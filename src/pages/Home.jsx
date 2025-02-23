@@ -9,21 +9,22 @@ function Home() {
 
     useEffect(() => {
         fetch("https://dummyjson.com/posts")
-        .then(res => res.json())
-        .then(data => {
-            setPosts(data.posts);
-            const allTags = [...new Set(data.posts.flatMap(post => post.tags))];
-            setTags(allTags);
-            }
-        )
+            .then(res => res.json())
+            .then(data => {
+                    setPosts(data.posts);
+                    const allTags = [...new Set(data.posts.flatMap(post => post.tags))];
+                    setTags(allTags);
+                }
+            )
     }, [])
 
     return (
-        <div>
-            <h1>Посты</h1>
+        <div className="filtersContainer">
+            <h1 className="titlePosts">Посты</h1>
             <div className={"tagsFilters"}>
                 {tags.map(tag => (
-                    <button key={tag.id} className='tags' onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}>
+                    <button key={tag.id} className='tags'
+                            onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}>
                         {tag} {tag === selectedTag ? "☑️" : ""}
                     </button>
                 ))}
@@ -32,11 +33,13 @@ function Home() {
                 {posts
                     .filter(post => !selectedTag || post.tags.includes(selectedTag))
                     .map((post) => (
-                        <li key={post.id}>
-                        <h3>{post.title}</h3>
-                        <p className="postBody">{post.body}</p>
-                            <p>❤️ {post.reactions.likes} 👎🏻 {post.reactions.dislikes} 👀 {post.views}</p>
-                            <button onClick={() => navigate(`/post/${post.id}`)}>Подробнее</button>
+                        <li key={post.id} className="post">
+                            <h3 className="postTitle">{post.title}</h3>
+                            <p className="postBody">{post.body}</p>
+                            <div className="reactionsNavContainer">
+                                <p>❤️ {post.reactions.likes} 👎🏻 {post.reactions.dislikes} 👀 {post.views}</p>
+                                <button onClick={() => navigate(`/post/${post.id}`)}>Подробнее</button>
+                            </div>
                         </li>
                     ))}
             </ul>
