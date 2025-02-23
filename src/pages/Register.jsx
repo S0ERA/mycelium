@@ -24,7 +24,15 @@ function Register() {
             alert("Некорректный email!");
             return;
         }
-        localStorage.setItem("user", JSON.stringify({name, email, password}));
+
+        const user = {
+            id: Date.now(),
+            name,
+            email,
+            password,
+        }
+
+        localStorage.setItem("user", JSON.stringify(user));
         navigate("/home");
     }
 
