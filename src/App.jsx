@@ -1,6 +1,5 @@
 // import AppRoutes from './routes/AppRoutes.jsx';
-// import NavBar from "./components/NavBar.jsx";
-// import Logo from './assets/logo.png';
+import Logo from './assets/logo.png';
 import "./styles/reset.css"
 import './App.css'
 import {Routes, Route, useNavigate} from "react-router-dom";
@@ -38,7 +37,12 @@ function App() {
 
     return (
         <>
-            <NavBar />
+            <header className="appHeader">
+                <img src={Logo} alt="Logo" className='logo' />
+                <h1>{`{ MYCELIUM }`}</h1>
+                <NavBar />
+            </header>
+
             <Routes>
                 <Route path="/register" element={<Register />}/>
                 <Route path="/login" element={<Login />}/>
