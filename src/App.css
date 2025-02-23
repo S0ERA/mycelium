@@ -1,12 +1,47 @@
 @import "styles/fonts.css";
 
 body {
-    background-color: rgb(0, 0, 0);
-    color: white;
+    background-color: rgb(45, 45, 45);
+    color: rgb(216, 213, 212);
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
 }
 
 h1 h3 {
 
+}
+
+.appHeader {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin: 30px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #666;
+}
+
+.appHeader h1 {
+    font-size: 52px;
+    font-weight: bold;
+    font-family: "Vollkorn", serif;
+}
+
+.logo {
+    width: 120px;
+}
+
+.navBar {
+    display: flex;
+}
+
+.navBar a {
+    text-decoration: none;
+    color: rgb(216, 213, 212);;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .auth-container {
@@ -17,9 +52,11 @@ h1 h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 .auth-container h2 {
     margin-bottom: 20px;
 }
+
 .auth-container input {
     display: block;
     width: 100%;
@@ -28,31 +65,155 @@ h1 h3 {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 .auth-container button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: #666;
+    color: rgb(216, 213, 212);;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 li {
-    margin-bottom: 30px;
-    border-radius: 5px;
-    background-color: #4d4d4d;
-    color: white;
+
+}
+
+.filtersContainer {
+
+}
+
+.titlePosts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .tags {
     margin: 0 5px 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 5px solid #4d4d4d;
+    background-color: #4d4d4d;
 }
 
 .tagsFilters {
     margin: 0 5px 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.post {
+    /*margin-bottom: 30px;*/
+    border-radius: 5px;
+    background-color: #4d4d4d;
+    color: rgb(216, 213, 212);;
+    padding: 20px;
+
+    margin: 0 100px 30px 100px;
+}
+
+.postTitle {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .postBody {
-    padding: 20px;
+    border-radius: 5px;
+    background-color: #666;
+    padding: 10px;
+}
+
+.reactionsNavContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.comments {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+
+.commentItem {
+    position: relative;
+    border-radius: 5px;
+    background-color: #666;
+    padding: 10px;
+    margin-bottom: 5px;
+    width: fit-content;
+    transition: background 0.2s;
+    min-height: 40px;
+}
+
+.commentItem:hover {
+    background: #eee;
+}
+
+.deleteBtn {
+    display: none;
+    position: relative;
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 2px 5px;
+    transition: opacity 0.2s;
+}
+
+.commentItem:hover .deleteBtn {
+    display: inline-block;
+}
+
+.commentContent {
+    position: relative;
+    display: inline-block;
+}
+
+
+.sendComments {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.commentInput {
+    border-radius: 5px;
+    background-color: #666;
+    padding: 10px;
+    width: 100%;
+}
+
+.buttonComms {
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: rgb(45, 45, 45);
+    padding: 10px;
+}
+
+.buttonComms:hover {
+    background-color: #666;
 }
