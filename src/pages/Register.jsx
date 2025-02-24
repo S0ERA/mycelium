@@ -8,7 +8,9 @@ function Register() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem("user")) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        if (localStorage.getItem("currentUser")) {
             navigate('/home');
         }
     }, [navigate])
@@ -19,9 +21,16 @@ function Register() {
             alert("Все поля обязательны!");
             return;
         }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         if (!emailRegex.test(email)) {
             alert("Некорректный email!");
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        if (users.some(u => u.email === email)) {
+            alert("Пользователь с таким email уже существует!")
             return;
         }
 
@@ -31,9 +40,10 @@ function Register() {
             email,
             password,
         }
-
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("users", JSON.stringify([...users, user]));
+        localStorage.setItem("currentUser", JSON.stringify(user));
         navigate("/home");
+        window.dispatchEvent(new Event('storage'));
     }
 
     return (

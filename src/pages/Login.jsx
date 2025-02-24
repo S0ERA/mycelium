@@ -1,17 +1,26 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Login() {
-    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const storedUser = JSON.parse(localStorage.getItem("user"));
-        if (storedUser && storedUser.email === email && storedUser.password === password) {
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const user = users.find(u =>
+            u.name === name &&
+            u.password === password
+        );
+
+        if (user) {
+            localStorage.setItem("currentUser", JSON.stringify(user));
             navigate("/home");
+
+            window.dispatchEvent(new Event('storage'));
         } else {
             setError("Неправильный email или пароль");
         }
@@ -22,11 +31,11 @@ function Login() {
             <h2>Вход</h2>
             <form onSubmit={handleLogin}>
                 <input
-                    type="email"
-                    placeholder="email"
-                    value={email}
+                    type="name"
+                    placeholder="name"
+                    value={name}
                     onChange={(e) =>
-                        setEmail(e.target.value)
+                        setName(e.target.value)
                     } required/>
                 <input
                     type="password"
@@ -37,6 +46,9 @@ function Login() {
                     } required/>
                 <button type="submit">Войти</button>
             </form>
+            <p>
+                Нет аккаунта? <Link to="/register">Зарегистрируйтесь</Link>
+            </p>
             {error && <p className="error">{error}</p>}
         </div>
     )

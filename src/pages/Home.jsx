@@ -23,7 +23,7 @@ function Home() {
             <h1 className="titlePosts">Посты</h1>
             <div className={"tagsFilters"}>
                 {tags.map(tag => (
-                    <button key={tag.id} className='tags'
+                    <button key={tag} className='tags'
                             onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}>
                         {tag} {tag === selectedTag ? "☑️" : ""}
                     </button>

@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 function PostPage() {
@@ -26,7 +26,7 @@ function PostPage() {
 
     const handleAddNewComment = () => {
         if (newComment.trim().length > 0) {
-            const userData = JSON.parse(localStorage.getItem("user"));
+            const userData = JSON.parse(localStorage.getItem("currentUser"));
 
             const comment = {
                 id: Date.now(),
