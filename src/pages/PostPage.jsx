@@ -62,7 +62,7 @@ function PostPage() {
 
 
     return (
-        <div className="post">
+        <div className="postAndComms">
             <h1 className="postTitle">{post.title}</h1>
             <p className="postBody">{post.body}</p>
             <h3 className="comments">Комментарии</h3>
