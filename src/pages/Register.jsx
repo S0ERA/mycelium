@@ -13,6 +13,8 @@ function Register() {
         if (localStorage.getItem("currentUser")) {
             navigate('/home');
         }
+
+
     }, [navigate])
 
     const handleSubmit = (e) => {

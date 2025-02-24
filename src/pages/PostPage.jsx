@@ -1,5 +1,6 @@
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {FaTrashAlt} from "react-icons/fa";
 
 function PostPage() {
     const {id} = useParams();
@@ -75,7 +76,7 @@ function PostPage() {
                                 <button className="deleteBtn"
                                         onClick={() => handleDeleteComment(c.id)}
                                 >
-                                    ✕
+                                    <FaTrashAlt className="icon" />
                                 </button>
                             )}
                         </div>
