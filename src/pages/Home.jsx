@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {BiMessageSquareDetail} from "react-icons/bi";
 import {
   FaHeart,
   FaThumbsDown,
   FaEye,
-  FaCaretSquareDown,
-  FaSquare,
-  FaCheckSquare,
   FaTimes,
   FaFilter,
 } from "react-icons/fa";
@@ -193,7 +191,7 @@ function Home() {
                     onClick={() => navigate(`/post/${post.id}`)}
                   >
                     Подробнее
-                    <FaCaretSquareDown className="icon" />
+                    <BiMessageSquareDetail className="icon" />
                   </button>
                 </div>
               </li>
