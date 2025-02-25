@@ -1,9 +1,9 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Register from "../pages/Register.jsx";
-import Login from "../pages/Login.jsx";
-import Home from "../pages/Home.jsx";
-import PostPage from "../pages/PostPage.jsx";
-import Analytics from "../pages/Analytics.jsx";
+import Register from "../pages/Register/Register.jsx";
+import Login from "../pages/Login/Login.jsx";
+import Home from "../pages/Home/Home.jsx";
+import PostPage from "../pages/PostPage/PostPage.jsx";
+import Analytics from "../pages/Analytics/Analytics.jsx";
 
 function AppRoutes() {
   const navigate = useNavigate("/login");

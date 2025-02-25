@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Bar, Line, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +12,9 @@ import {
   Legend,
   Colors,
 } from "chart.js";
+import BarChart from "../../components/Charts/BarChart";
+import LineChart from "../../components/Charts/LineChart";
+import PieChart from "../../components/Charts/PieChart";
 
 ChartJS.register(
   CategoryScale,
@@ -27,52 +29,43 @@ ChartJS.register(
   Colors,
 );
 
-function Analytics() {
+const Analytics = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const labels = data.map((p) => p.id);
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((data) => setData(data.posts))
-      .finally(() => setLoading(false));
-  }, []);
 
   const options = {
     responsive: true,
     scales: {
-      x: {
-        ticks: {
-          color: "rgb(216, 213, 212)",
-        },
-      },
-      y: {
-        ticks: {
-          color: "rgb(216, 213, 212)",
-        },
-      },
+      x: { ticks: { color: "rgb(216, 213, 212)" } },
+      y: { ticks: { color: "rgb(216, 213, 212)" } },
     },
     plugins: {
       legend: {
         position: "top",
         labels: {
           color: "rgb(216, 213, 212)",
-          font: {
-            size: 10,
-          },
+          font: { size: 10 },
         },
-        title: {
-          display: true,
-          text: `Аналитика постов`,
-          color: "rgb(216, 213, 212)",
-        },
+      },
+      title: {
+        display: true,
+        text: "Аналитика постов",
+        color: "rgb(216, 213, 212)",
       },
     },
   };
 
-  const barLineData = {
-    labels,
+  useEffect(() => {
+    fetch("https://dummyjson.com/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.posts);
+        setLoading(false);
+      });
+  }, []);
+
+  const getBarLineData = () => ({
+    labels: data.map((p) => p.id),
     datasets: [
       {
         label: "Лайки",
@@ -93,9 +86,9 @@ function Analytics() {
         borderColor: "rgb(252, 74, 88)",
       },
     ],
-  };
+  });
 
-  const pieData = {
+  const getPieData = () => ({
     labels: ["Лайки", "Дизлайки", "Просмотры"],
     datasets: [
       {
@@ -116,33 +109,31 @@ function Analytics() {
         ],
       },
     ],
-  };
+  });
 
   if (loading) return <div className="loading">Загрузка данных...</div>;
 
   return (
     <div className="analyticsContainer">
-      <div className="chart">
-        <h3>Столбчатая диаграмма</h3>
-        <div className="chartWrapper">
-          <Bar data={barLineData} options={options} />
-        </div>
-      </div>
-      <div className="chart">
-        <h3>Линейный график</h3>
-        <div className="chartWrapper">
-          <Line data={barLineData} options={options} />
-        </div>
-      </div>
+      <BarChart
+        data={getBarLineData()}
+        options={options}
+        title="Столбчатая диаграмма"
+      />
 
-      <div className="chart">
-        <h3>Круговая диаграмма</h3>
-        <div className="chartWrapper">
-          <Pie data={pieData} options={options} />
-        </div>
-      </div>
+      <LineChart
+        data={getBarLineData()}
+        options={options}
+        title="Линейный график"
+      />
+
+      <PieChart
+        data={getPieData()}
+        options={options}
+        title="Круговая диаграмма"
+      />
     </div>
   );
-}
+};
 
 export default Analytics;
