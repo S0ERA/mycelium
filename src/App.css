@@ -676,3 +676,7 @@ body {
 /*!*.detailsBtn:hover {*!*/
 /*!*    background-color: rgb(252, 74, 88);*!*/
 /*!*}*!*/
+
+.noRegNoLog {
+  margin-bottom: 10px;
+}
