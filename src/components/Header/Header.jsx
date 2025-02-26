@@ -1,5 +1,5 @@
-import Logo from "../assets/logo.png";
-import NavBar from "../components/NavBar/NavBar.jsx";
+import Logo from "../../assets/logo.png";
+import NavBar from "../NavBar/NavBar.jsx";
 import styles from "./Header.module.css";
 
 function Header() {
