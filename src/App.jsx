@@ -1,8 +1,8 @@
 import AppRoutes from "./routes/AppRoutes.jsx";
 import "./styles/reset.css";
-import "./App.css";
+import "./styles/global.css";
 
-import Header from "./components/Header.jsx";
+import Header from "./Header/Header.jsx";
 
 function App() {
   return (

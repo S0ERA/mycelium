@@ -1,0 +1,82 @@
+.filtersContainer {
+  position: sticky;
+  top: 20px;
+  flex: 0 0 auto;
+  width: 250px;
+  z-index: 10;
+}
+
+.filtersDropdown {
+  position: relative;
+}
+
+.dropdownToggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+  background-color: #4d4d4d;
+  color: rgb(216, 213, 212);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdownToggle:hover {
+  background-color: #666;
+}
+
+.dropdownContent {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background-color: #4d4d4d;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+  margin-top: 20px;
+}
+
+.tagsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tagItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #666;
+  border-radius: 20px;
+  cursor: pointer;
+  color: rgb(216, 213, 212);
+}
+
+.tagItem.selected {
+  background-color: rgb(252, 74, 88);
+}
+
+.removeIcon {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.resetButton {
+  padding: 8px 12px;
+  background-color: rgb(252, 74, 88);
+  color: rgb(216, 213, 212);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.resetButton:hover {
+  background-color: #ff4757;
+}

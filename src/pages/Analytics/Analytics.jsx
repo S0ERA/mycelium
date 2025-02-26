@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "./Analytics.module.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -114,7 +115,7 @@ const Analytics = () => {
   if (loading) return <div className="loading">Загрузка данных...</div>;
 
   return (
-    <div className="analyticsContainer">
+    <div className={styles.analyticsContainer}>
       <BarChart
         data={getBarLineData()}
         options={options}

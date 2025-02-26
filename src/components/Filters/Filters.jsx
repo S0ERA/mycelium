@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaFilter, FaTimes } from "react-icons/fa";
+import styles from "./Filters.module.css";
 
 export const Filters = ({ onFilterChange }) => {
   const [tags, setTags] = useState([]);
@@ -31,10 +32,10 @@ export const Filters = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="filtersContainer">
-      <div className="filtersDropdown">
+    <div className={styles.filtersContainer}>
+      <div className={styles.filtersDropdown}>
         <button
-          className="dropdownToggle"
+          className={styles.dropdownToggle}
           onClick={() => setIsFiltersOpen(!isFiltersOpen)}
         >
           <FaFilter /> Фильтры{" "}
@@ -42,12 +43,12 @@ export const Filters = ({ onFilterChange }) => {
         </button>
 
         {isFiltersOpen && (
-          <div className="dropdownContent">
-            <div className="tagsList">
+          <div className={styles.dropdownContent}>
+            <div className={styles.tagsList}>
               {tags.map((tag) => (
                 <label
                   key={tag}
-                  className={`tagItem ${selectedTags.includes(tag) ? "selected" : ""}`}
+                  className={`${styles.tagItem} ${selectedTags.includes(tag) ? styles.selected : ""}`}
                 >
                   <input
                     type="checkbox"
@@ -57,12 +58,12 @@ export const Filters = ({ onFilterChange }) => {
                   />
                   {tag}
                   {selectedTags.includes(tag) && (
-                    <FaTimes className="removeIcon" />
+                    <FaTimes className={styles.removeIcon} />
                   )}
                 </label>
               ))}
             </div>
-            <button className="resetButton" onClick={resetFilters}>
+            <button className={styles.resetButton} onClick={resetFilters}>
               Сбросить фильтры
             </button>
           </div>

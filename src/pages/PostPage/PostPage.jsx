@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { CommentList } from "../../components/Comments/CommentList.jsx";
-import { CommentForm } from "../../components/Comments/CommentForm.jsx";
-import { PostCard } from "../../components/PostCard.jsx";
+import { CommentList } from "../../components/Comments/CommentList/CommentList.jsx";
+import { CommentForm } from "../../components/Comments/CommentForm/CommentForm.jsx";
+import { PostCard } from "../../components/PostCard/PostCard.jsx";
 import { useReactions } from "../../hooks/useReactions.jsx";
+import styles from "./PostPage.module.css";
 
 function PostPage() {
   const { id } = useParams();
@@ -61,10 +62,10 @@ function PostPage() {
     });
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="postAndComms">
+    <div className={styles.postAndComms}>
       <PostCard
         post={post}
         showDetailsButton={false}

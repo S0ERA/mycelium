@@ -1,0 +1,35 @@
+.commentItem {
+  position: relative;
+  border-radius: 20px;
+  background-color: #666;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: fit-content;
+  transition: background 0.2s;
+  min-height: 40px;
+}
+
+.commentItem:hover {
+  background: #eee;
+}
+
+.deleteBtn {
+  display: none;
+  position: relative;
+  background: none;
+  border: none;
+  color: rgb(252, 74, 88);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px 5px;
+  transition: opacity 0.2s;
+}
+
+.commentItem:hover .deleteBtn {
+  display: inline-block;
+}
+
+.commentContent {
+  position: relative;
+  display: inline-block;
+}

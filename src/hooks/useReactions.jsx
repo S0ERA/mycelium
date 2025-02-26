@@ -1,11 +1,9 @@
-// useReactions.jsx
 import { useState, useEffect } from "react";
 
 export const useReactions = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Загрузка начальных данных
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -38,7 +36,6 @@ export const useReactions = () => {
     loadData();
   }, []);
 
-  // Обработчик реакций
   const handleReaction = (postId, type) => {
     setPosts((prevPosts) =>
       prevPosts.map((post) => {
@@ -48,24 +45,18 @@ export const useReactions = () => {
         const savedReactions =
           JSON.parse(localStorage.getItem("postReactions")) || {};
 
-        // Логика обновления реакций
         if (newReactions.userReaction === type) {
-          // Сброс реакции
           newReactions[`${type}s`] -= 1;
           newReactions.userReaction = null;
           delete savedReactions[postId];
         } else {
-          // Удаление предыдущей реакции
           if (newReactions.userReaction) {
             newReactions[`${newReactions.userReaction}s`] -= 1;
           }
-          // Добавление новой реакции
           newReactions[`${type}s`] += 1;
           newReactions.userReaction = type;
           savedReactions[postId] = { type };
         }
-
-        // Сохранение в localStorage
         localStorage.setItem("postReactions", JSON.stringify(savedReactions));
 
         return { ...post, reactions: newReactions };

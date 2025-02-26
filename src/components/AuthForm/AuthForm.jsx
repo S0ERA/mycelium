@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./AuthForm.module.css";
 
 const AuthForm = ({
   title,
@@ -8,12 +9,14 @@ const AuthForm = ({
   submitText = "Отправить",
   footerContent,
 }) => (
-  <div className="auth-container">
-    <h2>{title}</h2>
+  <div className={styles.authContainer}>
+    <h2 className={styles.authContainerTitle}>{title}</h2>
     <form onSubmit={onSubmit}>
       {children}
       {error && <p className="error">{error}</p>}
-      <button type="submit">{submitText}</button>
+      <button className={styles.submit} type="submit">
+        {submitText}
+      </button>
     </form>
     {footerContent && <div className="auth-footer">{footerContent}</div>}
   </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthForm from "../../components/AuthForm.jsx";
+import AuthForm from "../../components/AuthForm/AuthForm.jsx";
 
 function Register() {
   const [name, setName] = useState("");
@@ -69,6 +69,7 @@ function Register() {
       }
     >
       <input
+        className="authInput"
         type="text"
         placeholder="Имя"
         value={name}
@@ -76,6 +77,7 @@ function Register() {
         required
       />
       <input
+        className="authInput"
         type="email"
         placeholder="Email"
         value={email}
@@ -83,6 +85,7 @@ function Register() {
         required
       />
       <input
+        className="authInput"
         type="password"
         placeholder="Пароль"
         value={password}

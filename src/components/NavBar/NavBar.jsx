@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FaHome, FaSignOutAlt, FaUserPlus, FaSignInAlt } from "react-icons/fa";
+import styles from "./NavBar.module.css";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -25,25 +26,25 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navItems">
+    <nav className={styles.navBar}>
+      <div className={styles.navItems}>
         {isLoggedIn ? (
           <>
-            <Link to="/home" className="navLink">
+            <Link to="/home" className={styles.navLink}>
               <FaHome className="icon" />
             </Link>
-            <button onClick={handleLogout} className="navButton">
+            <button onClick={handleLogout} className={styles.navButton}>
               Sign Out
               <FaSignOutAlt className="icon" />
             </button>
           </>
         ) : (
           <>
-            <Link to="/login" className="navLink">
+            <Link to="/login" className={styles.navLink}>
               Sign in
               <FaSignInAlt className="icon" />
             </Link>
-            <Link to="/register" className="navLink">
+            <Link to="/register" className={styles.navLink}>
               Sign up
               <FaUserPlus className="icon" />
             </Link>

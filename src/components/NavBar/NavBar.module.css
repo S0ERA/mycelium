@@ -1,0 +1,44 @@
+.navBar {
+  margin-left: auto;
+}
+
+.navItems {
+  display: flex;
+  gap: 1rem;
+}
+
+.navLink {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: rgb(216, 213, 212);
+  border-radius: 20px;
+  transition: background-color 0.2s;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.navLink:hover {
+  background-color: #e9ecef;
+  color: #666;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid rgb(252, 74, 88);
+  color: rgb(252, 74, 88);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navButton:hover {
+  background-color: rgb(252, 74, 88);
+  color: white;
+}

@@ -1,0 +1,24 @@
+.mainContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+.postsContainer {
+  flex: 1;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post {
+  border-radius: 20px;
+  background-color: #4d4d4d;
+  color: rgb(216, 213, 212);
+  padding: 20px;
+  margin: 30px 100px 10px 0px;
+}

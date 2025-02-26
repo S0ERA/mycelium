@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import AuthForm from "../../components/AuthForm";
+import { useNavigate } from "react-router-dom";
+import AuthForm from "../../components/AuthForm/AuthForm.jsx";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -48,6 +48,7 @@ const Login = () => {
       }
     >
       <input
+        className="authInput"
         type="text"
         placeholder="Имя"
         value={name}
@@ -55,6 +56,7 @@ const Login = () => {
         required
       />
       <input
+        className="authInput"
         type="password"
         placeholder="Пароль"
         value={password}

@@ -1,0 +1,27 @@
+.appHeader {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  gap: 20px;
+  border-bottom: 1px solid #666;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-right: auto;
+}
+
+.textLogo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 52px;
+  font-weight: bold;
+  font-family: "Vollkorn", serif;
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: 5px;
+}
