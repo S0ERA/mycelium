@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styles from "./Analytics.module.css";
+import {options} from "../../constants/Charts/options.jsx";
+import {getBarLineData} from "../../constants/Charts/getBarLineData.jsx";
+import {getPieData} from "../../constants/Charts/getPieData.jsx";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,6 +19,7 @@ import {
 import BarChart from "../../components/Charts/BarChart";
 import LineChart from "../../components/Charts/LineChart";
 import PieChart from "../../components/Charts/PieChart";
+import {fetchPosts} from "../../services/api.js";
 
 ChartJS.register(
   CategoryScale,
@@ -30,106 +34,43 @@ ChartJS.register(
   Colors,
 );
 
+
+
 const Analytics = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const options = {
-    responsive: true,
-    scales: {
-      x: { ticks: { color: "rgb(216, 213, 212)" } },
-      y: { ticks: { color: "rgb(216, 213, 212)" } },
-    },
-    plugins: {
-      legend: {
-        position: "top",
-        labels: {
-          color: "rgb(216, 213, 212)",
-          font: { size: 10 },
-        },
-      },
-      title: {
-        display: true,
-        text: "Аналитика постов",
-        color: "rgb(216, 213, 212)",
-      },
-    },
-  };
-
   useEffect(() => {
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.posts);
+    const loadData = async () => {
+      const posts = await fetchPosts();
+        setData(posts);
         setLoading(false);
-      });
+      };
+
+    loadData();
   }, []);
 
-  const getBarLineData = () => ({
-    labels: data.map((p) => p.id),
-    datasets: [
-      {
-        label: "Лайки",
-        data: data.map((p) => p.reactions.likes),
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-        borderColor: "rgb(53, 162, 235)",
-      },
-      {
-        label: "Дизлайки",
-        data: data.map((p) => p.reactions.dislikes),
-        backgroundColor: "rgba(74, 252, 88, 0.5)",
-        borderColor: "rgb(74, 252, 88)",
-      },
-      {
-        label: "Просмотры",
-        data: data.map((p) => p.views),
-        backgroundColor: "rgba(252, 74, 88, 0.5)",
-        borderColor: "rgb(252, 74, 88)",
-      },
-    ],
-  });
-
-  const getPieData = () => ({
-    labels: ["Лайки", "Дизлайки", "Просмотры"],
-    datasets: [
-      {
-        data: [
-          data.reduce((acc, p) => acc + p.reactions.likes, 0),
-          data.reduce((acc, p) => acc + p.reactions.dislikes, 0),
-          data.reduce((acc, p) => acc + p.views, 0),
-        ],
-        backgroundColor: [
-          "rgba(74, 88, 252, 0.5)",
-          "rgba(74, 252, 88, 0.5)",
-          "rgba(252, 74, 88, 0.5)",
-        ],
-        borderColor: [
-          "rgb(74, 88, 252)",
-          "rgb(74, 252, 88)",
-          "rgb(252, 74, 88)",
-        ],
-      },
-    ],
-  });
+  const barLineData = useMemo(() => getBarLineData(data), [data]);
+  const pieData = useMemo(() => getPieData(data), [data]);
 
   if (loading) return <div className="loading">Загрузка данных...</div>;
 
   return (
     <div className={styles.analyticsContainer}>
       <BarChart
-        data={getBarLineData()}
+        data={barLineData}
         options={options}
         title="Столбчатая диаграмма"
       />
 
       <LineChart
-        data={getBarLineData()}
+        data={barLineData}
         options={options}
         title="Линейный график"
       />
 
       <PieChart
-        data={getPieData()}
+        data={pieData}
         options={options}
         title="Круговая диаграмма"
       />
