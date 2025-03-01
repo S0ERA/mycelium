@@ -6,8 +6,12 @@ export const CommentList = ({ comments, onDeleteComment }) => {
     <>
       <h3 className={styles.comments}>Комментарии</h3>
       <ul>
-        {comments.map((c) => (
-          <CommentItem key={c.id} comment={c} onDelete={onDeleteComment} />
+        {comments.map((comment) => (
+          <CommentItem
+            key={comment.id}
+            comment={comment}
+            onDelete={onDeleteComment}
+          />
         ))}
       </ul>
     </>

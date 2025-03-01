@@ -22,7 +22,7 @@ const Login = () => {
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/home");
-      window.dispatchEvent(new Event("storage"));
+      window.location.reload();
     } else {
       setError("Неправильное имя или пароль");
     }

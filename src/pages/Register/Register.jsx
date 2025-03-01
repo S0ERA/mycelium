@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm.jsx";
+import {createUser, validateForm} from "../../constants/constants.js";
 
 function Register() {
   const [name, setName] = useState("");
@@ -9,45 +10,32 @@ function Register() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const validationError = validateForm(name, email, password, users);
+
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    const user = createUser(name, email, password);
+
+    localStorage.setItem("users", JSON.stringify([...users, user]));
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    navigate("/home");
+    window.location.reload();
+  };
+
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
       navigate("/home");
     }
   }, [navigate]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
-
-    if (!name || !email || !password) {
-      setError("Все поля обязательны!");
-      return;
-    }
-
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    if (!emailRegex.test(email)) {
-      setError("Некорректный email!");
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    if (users.some((u) => u.email === email)) {
-      setError("Пользователь с таким email уже существует!");
-      return;
-    }
-
-    const user = {
-      id: Date.now(),
-      name,
-      email,
-      password,
-    };
-
-    localStorage.setItem("users", JSON.stringify([...users, user]));
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    navigate("/home");
-    window.dispatchEvent(new Event("storage"));
-  };
 
   return (
     <AuthForm

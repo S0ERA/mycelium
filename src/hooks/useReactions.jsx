@@ -38,29 +38,41 @@ export const useReactions = () => {
 
   const handleReaction = (postId, type) => {
     setPosts((prevPosts) =>
-      prevPosts.map((post) => {
-        if (post.id !== postId) return post;
+        prevPosts.map((post) => {
+          if (post.id !== postId) return post;
 
-        const newReactions = { ...post.reactions };
-        const savedReactions =
-          JSON.parse(localStorage.getItem("postReactions")) || {};
+          const newReactions = { ...post.reactions };
+          const savedReactions =
+              JSON.parse(localStorage.getItem("postReactions")) || {};
 
-        if (newReactions.userReaction === type) {
-          newReactions[`${type}s`] -= 1;
-          newReactions.userReaction = null;
-          delete savedReactions[postId];
-        } else {
-          if (newReactions.userReaction) {
-            newReactions[`${newReactions.userReaction}s`] -= 1;
+          if (newReactions.userReaction === type) {
+            newReactions[`${type}s`] -= 1;
+            newReactions.userReaction = null;
+
+            const updatedReactions = Object.keys(savedReactions).reduce(
+                (acc, key) => {
+                  if (key !== postId.toString()) {
+                    acc[key] = savedReactions[key];
+                  }
+                  return acc;
+                },
+                {}
+            );
+            localStorage.setItem("postReactions", JSON.stringify(updatedReactions));
+          } else {
+
+            if (newReactions.userReaction) {
+              newReactions[`${newReactions.userReaction}s`] -= 1;
+            }
+            newReactions[`${type}s`] += 1;
+            newReactions.userReaction = type;
+
+            const updatedReactions = { ...savedReactions, [postId]: { type } };
+            localStorage.setItem("postReactions", JSON.stringify(updatedReactions));
           }
-          newReactions[`${type}s`] += 1;
-          newReactions.userReaction = type;
-          savedReactions[postId] = { type };
-        }
-        localStorage.setItem("postReactions", JSON.stringify(savedReactions));
 
-        return { ...post, reactions: newReactions };
-      }),
+          return { ...post, reactions: newReactions };
+        }),
     );
   };
 

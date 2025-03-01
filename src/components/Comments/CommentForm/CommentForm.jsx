@@ -5,7 +5,10 @@ export const CommentForm = ({ onSubmit }) => {
   const [newComment, setNewComment] = useState("");
 
   const handleSubmit = (e) => {
+    if (e && e.key !== "Enter" && e.type !== "click") return;
+
     e?.preventDefault();
+
     if (newComment.trim()) {
       onSubmit(newComment);
       setNewComment("");
@@ -20,7 +23,7 @@ export const CommentForm = ({ onSubmit }) => {
         placeholder="Оставьте свой комментарий"
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
-        onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
+        onKeyPress={handleSubmit}
       />
       <button className={styles.buttonComms} onClick={handleSubmit}>
         Отправить

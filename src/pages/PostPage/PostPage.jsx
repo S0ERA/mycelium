@@ -14,18 +14,6 @@ function PostPage() {
 
   const STORAGE_KEY = `post_${id}_comments`;
 
-  useEffect(() => {
-    if (!post) return;
-
-    fetch(`https://dummyjson.com/posts/${id}/comments`)
-      .then((res) => res.json())
-      .then((serverComments) => {
-        const savedComments =
-          JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-        setComments([...savedComments, ...serverComments.comments]);
-      });
-  }, [id, post]);
-
   const handleAddNewComment = (commentText) => {
     const userData = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -61,6 +49,18 @@ function PostPage() {
       return newComments;
     });
   };
+
+  useEffect(() => {
+    if (!post) return;
+
+    fetch(`https://dummyjson.com/posts/${id}/comments`)
+        .then((res) => res.json())
+        .then((serverComments) => {
+          const savedComments =
+              JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+          setComments([...savedComments, ...serverComments.comments]);
+        });
+  }, [id, post]);
 
   if (loading) return <div className="loading">Loading...</div>;
 

@@ -1,13 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 const SecuredRoute = () => {
-    const isAuthenticated = !!localStorage.getItem("currentUser");
+  const isAuthenticated = !!localStorage.getItem("currentUser");
 
-    if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
-    }
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
 
-    return <Outlet />;
+  return <Outlet />;
 };
 
 export default SecuredRoute;
